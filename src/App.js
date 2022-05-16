@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Figure, ListGroup, Form, Button } from 'react-bootstrap';
 import './App.css';
 
 class App extends React.Component {
@@ -60,6 +59,15 @@ class App extends React.Component {
             Explore!
           </Button>
         </Form>
+
+        <ListGroup>
+          <ListGroup.Item>City: {this.state.city}</ListGroup.Item>
+          <ListGroup.Item>Longitute: {this.state.longitute}</ListGroup.Item>
+          <ListGroup.Item>Latitude: {this.state.latitude}</ListGroup.Item>
+          <ListGroup.Item>
+          </ListGroup.Item>
+        </ListGroup>
+           
       </>
     )
   }
