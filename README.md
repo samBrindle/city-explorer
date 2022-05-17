@@ -17,6 +17,35 @@ Coming soon
 
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+Name of feature: Locations - User can enter a location (city name) and recieve the longitude and latitude back.
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 2:00
+
+Finish time: 4:40
+
+Actual time needed to complete: 2 hours 40 min
+
+Name of feature: Map - When user enters a location (city name) we use the lon and lat to grab a map and display it with the other data.
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 4:50
+
+Finish time: 5:30
+
+Actual time needed to complete: 1 hour 20 min
+
+Name of feature: Error - When an error occurs an alert will pop up to tell the user what happened
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 5:30
+
+Finish time: 6:00
+
+Actual time needed to complete: 30 min
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 Coming soon
