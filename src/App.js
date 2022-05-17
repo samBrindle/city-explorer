@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Figure, ListGroup, Form, Button } from 'react-bootstrap';
+import { Figure, ListGroup, Form, Button, Alert } from 'react-bootstrap';
 import './App.css';
 
 class App extends React.Component {
@@ -9,14 +9,17 @@ class App extends React.Component {
     this.state = {
       locationData: [],
       city: '',
-      longitute: '',
+      longitude: '',
       latitude: '',
-      error: false
+      showLocation: false,
+      error: false,
+      errorMessage: ''
     }
   }
 
   handleCitySubmit = async (e) => {
     e.preventDefault();
+    try {
     let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_ACCESS_TOKEN}&q=${this.state.city}&format=json`;
     console.log(this.state.city);
     console.log(url);
@@ -24,9 +27,18 @@ class App extends React.Component {
     console.log(cityInfo.data[0]);
     
     this.setState({
-      longitute:cityInfo.data[0].lon,
+      longitude:cityInfo.data[0].lon,
       latitude:cityInfo.data[0].lat,
+      showLocation: true,
     })
+    } catch (error) {
+      console.log('error: ', error);
+      console.log('error message: ', error.response);
+      this.setState({
+        error: true,
+        errorMessage: error.message
+      })
+    };
   }
 
   cityChange = (e) => {
@@ -60,14 +72,28 @@ class App extends React.Component {
           </Button>
         </Form>
 
-        <ListGroup>
-          <ListGroup.Item>City: {this.state.city}</ListGroup.Item>
-          <ListGroup.Item>Longitute: {this.state.longitute}</ListGroup.Item>
-          <ListGroup.Item>Latitude: {this.state.latitude}</ListGroup.Item>
-          <ListGroup.Item>
-          </ListGroup.Item>
-        </ListGroup>
-           
+        {this.state.showLocation && 
+        <>
+          <ListGroup>
+            <ListGroup.Item>City: {this.state.city}</ListGroup.Item>
+            <ListGroup.Item>Longitute: {this.state.longitude}</ListGroup.Item>
+            <ListGroup.Item>Latitude: {this.state.latitude}</ListGroup.Item>
+          </ListGroup>
+        
+          <Figure>
+            <Figure.Image
+            // width={171}
+            // height={180}
+            // alt="171x180"
+            src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_ACCESS_TOKEN}&center=${this.state.latitude},${this.state.longitude}&zoom=12`}
+            />
+          </Figure>
+        </>
+        }
+
+        {this.state.error && 
+          <Alert>Error!! {this.state.errorMessage}</Alert>
+        } 
       </>
     )
   }
