@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+* {
+  text-align: center;
+  background-color: gray;
+}
+
+#submitBox {
+  background-color: white;
+}
+
+#dataTitle {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.badError {
+  color: red;
+  font-weight: bold;
+  font-size: 2em;
+  margin-top: 10%;
+}
