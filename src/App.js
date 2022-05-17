@@ -61,11 +61,12 @@ class App extends React.Component {
         <p>Longitute: {this.state.longitute}</p>
         <p>Latitude: {this.state.latitude}</p> */}
 
+        <h1>City Planner</h1>
 
-        <Form onSubmit={this.handleCitySubmit}>
+        <Form onSubmit={this.handleCitySubmit} >
           <Form.Group>
             <Form.Label>Pick a City</Form.Label>
-            <Form.Control type="string" placeholder="Ex. Seattle" onChange={this.cityChange} />
+            <Form.Control id="submitBox" type="string" placeholder="Ex. Seattle" onChange={this.cityChange} />
           </Form.Group>
           <Button variant="primary" type="submit">
             Explore!
@@ -75,7 +76,7 @@ class App extends React.Component {
         {this.state.showLocation && 
         <>
           <ListGroup>
-            <ListGroup.Item>City: {this.state.city}</ListGroup.Item>
+            <ListGroup.Item id="dataTitle">City: {this.state.city}</ListGroup.Item>
             <ListGroup.Item>Longitute: {this.state.longitude}</ListGroup.Item>
             <ListGroup.Item>Latitude: {this.state.latitude}</ListGroup.Item>
           </ListGroup>
@@ -92,7 +93,9 @@ class App extends React.Component {
         }
 
         {this.state.error && 
-          <Alert>Error!! {this.state.errorMessage}</Alert>
+          <Alert className="badError">
+            <Alert.Heading variant='danger'>Error!! {this.state.errorMessage}</Alert.Heading>
+          </Alert>
         } 
       </>
     )
