@@ -13,7 +13,9 @@ class App extends React.Component {
       latitude: '',
       showLocation: false,
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      date: '',
+      description: ''
     }
   }
 
@@ -39,6 +41,18 @@ class App extends React.Component {
         errorMessage: error.message
       })
     };
+    handleWeather(this.state.city);
+  }
+
+  handleWeather = async (e) => {
+    e.preventDefault();
+    let url = `${process.env.AlertREACT_APP_BACKEND}/weather?city_name=${this.state.city}`
+    let weatherInfo = await axios.get(url);
+      //test if weatherINfo is working 
+      // go from there
+    this.setState({
+
+    })
   }
 
   cityChange = (e) => {
