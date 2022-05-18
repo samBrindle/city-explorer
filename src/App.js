@@ -14,8 +14,7 @@ class App extends React.Component {
       showLocation: false,
       error: false,
       errorMessage: '',
-      date: '',
-      description: ''
+      weather: []
     }
   }
 
@@ -23,14 +22,17 @@ class App extends React.Component {
     e.preventDefault();
     try {
     let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_ACCESS_TOKEN}&q=${this.state.city}&format=json`;
-    console.log(this.state.city);
-    console.log(url);
+
+    let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}`
+
     let cityInfo = await axios.get(url);
-    console.log(cityInfo.data[0]);
-    
+
+    let weatherInfo = await axios.get(urlWeather);
+ 
     this.setState({
       longitude:cityInfo.data[0].lon,
       latitude:cityInfo.data[0].lat,
+      weather: weatherInfo,
       showLocation: true,
     })
     } catch (error) {
@@ -41,19 +43,19 @@ class App extends React.Component {
         errorMessage: error.message
       })
     };
-    handleWeather(this.state.city);
+    // handleWeather(this.state.city);
   }
 
-  handleWeather = async (e) => {
-    e.preventDefault();
-    let url = `${process.env.AlertREACT_APP_BACKEND}/weather?city_name=${this.state.city}`
-    let weatherInfo = await axios.get(url);
-      //test if weatherINfo is working 
-      // go from there
-    this.setState({
-
-    })
-  }
+  // handleWeather = async (e) => {
+  //   // e.preventDefault();
+  //   let url = `${process.env.AlertREACT_APP_BACKEND}/weather?city_name=${this.state.city}`
+  //   let weatherInfo = await axios.get(url);
+  //     //test if weatherINfo is working 
+  //     // go from there
+  //   this.setState({
+  //     weather: weatherInfo
+  //   })
+  // }
 
   cityChange = (e) => {
     this.setState({
@@ -93,6 +95,9 @@ class App extends React.Component {
             <ListGroup.Item id="dataTitle">City: {this.state.city}</ListGroup.Item>
             <ListGroup.Item>Longitute: {this.state.longitude}</ListGroup.Item>
             <ListGroup.Item>Latitude: {this.state.latitude}</ListGroup.Item>
+            <ListGroup.Item>Weather on {this.state.weather.data[0].date}: {this.state.weather.data[0].description}</ListGroup.Item>
+            <ListGroup.Item>Weather on {this.state.weather.data[1].date}: {this.state.weather.data[1].description}</ListGroup.Item>
+            <ListGroup.Item>Weather on {this.state.weather.data[2].date}: {this.state.weather.data[2].description}</ListGroup.Item>
           </ListGroup>
         
           <Figure>
