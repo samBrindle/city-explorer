@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Weather from './Weather';
-import { Figure, ListGroup, Form, Button, Alert } from 'react-bootstrap';
+import { Figure, ListGroup, Form, Button, Alert, Table } from 'react-bootstrap';
 import './App.css';
 
 class App extends React.Component {
@@ -37,6 +37,7 @@ class App extends React.Component {
       latitude:cityInfo.data[0].lat,
       weather: weatherInfo.data,
       showLocation: true,
+      error: false
     })
     } catch (error) {
       console.log('error: ', error);
@@ -89,7 +90,7 @@ class App extends React.Component {
             <ListGroup.Item>Latitude: {this.state.latitude}</ListGroup.Item>
             <Weather
               weather={this.state.weather}
-            />
+            /> 
           </ListGroup>
         
           <Figure>
@@ -104,8 +105,8 @@ class App extends React.Component {
         }
 
         {this.state.error && 
-          <Alert className="badError">
-            <Alert.Heading variant='danger'>Error!! {this.state.errorMessage}</Alert.Heading>
+          <Alert variant="danger" className="badError">
+            <Alert.Heading>Error!! {this.state.errorMessage}</Alert.Heading>
           </Alert>
         } 
       </>
