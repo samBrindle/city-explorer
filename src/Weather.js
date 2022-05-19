@@ -7,10 +7,10 @@ class Weather extends React.Component {
         let weather = this.props.weather;
 
         let forecastArr = weather.map( (day,idx) => {
-            return <ListGroup.Item key={idx} >Weather on {day.date}: {day.description}</ListGroup.Item>
+            return <ListGroup.Item key={idx} >Weather on {day.date}: Low of {day.low_temp}, High of {day.high_temp} with {day.description}</ListGroup.Item>
         });
         
-        console.log(this.props.weather);
+        console.log(forecastArr);
         return(
             <>
             {forecastArr}
