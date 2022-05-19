@@ -24,12 +24,14 @@ class App extends React.Component {
     try {
     let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_ACCESS_TOKEN}&q=${this.state.city}&format=json`;
 
-    let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}`
-
+    // let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}`
     let cityInfo = await axios.get(url);
 
+    let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}&lat=${cityInfo.data[0].lat}&lon=${cityInfo.data[0].lat}`
+    
+    console.log(cityInfo);
     let weatherInfo = await axios.get(urlWeather);
- 
+    console.log(weatherInfo.data);
     this.setState({
       longitude:cityInfo.data[0].lon,
       latitude:cityInfo.data[0].lat,
@@ -67,17 +69,6 @@ class App extends React.Component {
   render() {
     return(
       <>
-        {/* <h1>Data From an API</h1>
-        <p>{this.state.city}</p>
-        <form onSubmit={this.handleCitySubmit}>
-          <label htmlFor="cityName">Pick a City</label>
-          <input type="text" id="cityName" onChange={this.cityChange} />
-          <button type="submit">Explore!</button>
-        </form>
-
-        <p>Longitute: {this.state.longitute}</p>
-        <p>Latitude: {this.state.latitude}</p> */}
-
         <h1>City Planner</h1>
 
         <Form onSubmit={this.handleCitySubmit} >
@@ -124,27 +115,5 @@ class App extends React.Component {
 
 // example of a map url:
     // `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_API_KEY}&center=47.6038321,-122.3300624&zoom=12`
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
