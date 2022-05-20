@@ -51,9 +51,25 @@
   font-size: 1.5em;
 }
 
-.badError {
-  color: red;
-  font-weight: bold;
-  font-size: 2em;
-  margin-top: 10%;
-} 
+.dataLists {
+  width: fit-content;
+  border: 2px solid black;
+  margin: 5px auto;
+  padding: 2px;
+  margin-bottom: 20px;
+}
+
+#weatherTable {
+  margin-top: 40px;
+}
+
+#containerHelp {
+  height: 400px;
+  width: 400px;
+}
+
+#map {
+  border: groove 12px lightgreen;
+  width: fit-content;
+  margin: 20px auto;
+}
