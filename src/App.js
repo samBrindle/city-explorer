@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Weather from './Weather';
-import { Figure, ListGroup, Form, Button, Alert, Table } from 'react-bootstrap';
+import Movie from './Movie';
+import { Figure, ListGroup, Form, Button, Alert, Table} from 'react-bootstrap';
 import './App.css';
 
 class App extends React.Component {
@@ -15,7 +16,8 @@ class App extends React.Component {
       showLocation: false,
       error: false,
       errorMessage: '',
-      weather: []
+      weather: [],
+      movie: []
     }
   }
 
@@ -28,14 +30,19 @@ class App extends React.Component {
     let cityInfo = await axios.get(url);
 
     let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}&lat=${cityInfo.data[0].lat}&lon=${cityInfo.data[0].lat}`
-    
     console.log(cityInfo);
+
+    let urlMovie = `${process.env.REACT_APP_BACKEND}/movies?city_name=${this.state.city}`
+    console.log(urlMovie);
+    
     let weatherInfo = await axios.get(urlWeather);
+    let movieInfo = await axios.get(urlMovie);
     console.log(weatherInfo.data);
     this.setState({
       longitude:cityInfo.data[0].lon,
       latitude:cityInfo.data[0].lat,
       weather: weatherInfo.data,
+      movie: movieInfo.data,
       showLocation: true,
       error: false
     })
@@ -84,16 +91,43 @@ class App extends React.Component {
 
         {this.state.showLocation && 
         <>
-          <ListGroup>
-            <ListGroup.Item id="dataTitle">City: {this.state.city}</ListGroup.Item>
-            <ListGroup.Item>Longitute: {this.state.longitude}</ListGroup.Item>
-            <ListGroup.Item>Latitude: {this.state.latitude}</ListGroup.Item>
+          <ListGroup className="dataLists">
+            <ListGroup.Item id="dataTitle" variant="dark">City: {this.state.city}</ListGroup.Item>
+            <ListGroup.Item variant="light">Longitute: {this.state.longitude}</ListGroup.Item>
+            <ListGroup.Item variant="dark">Latitude: {this.state.latitude}</ListGroup.Item>
+          </ListGroup>
+          
+          {/* <ListGroup className="dataLists">
             <Weather
               weather={this.state.weather}
             /> 
-          </ListGroup>
-        
-          <Figure>
+
+          </ListGroup> */}
+
+          <Table stiped bordered hover variant="dark" id="weatherTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Low Temp</th>
+                <th>High Temp</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <Weather
+                weather={this.state.weather}
+              /> 
+
+            </tbody>
+          </Table>
+
+
+          <Movie
+            movie={this.state.movie}
+          />
+
+
+          <Figure id="map">
             <Figure.Image
             // width={171}
             // height={180}
