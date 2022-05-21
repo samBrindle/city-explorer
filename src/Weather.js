@@ -8,7 +8,7 @@ class Weather extends React.Component {
         let forecastArr = weather.map( (day,idx) => {
 
             return (
-                <tr>
+                <tr key={idx}>
                     <td>{day.date}</td>
                     <td>{day.low_temp}</td>
                     <td>{day.high_temp}</td>
