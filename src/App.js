@@ -29,7 +29,7 @@ class App extends React.Component {
     // let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}`
     let cityInfo = await axios.get(url);
 
-    let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}&lat=${cityInfo.data[0].lat}&lon=${cityInfo.data[0].lat}`
+    let urlWeather = `${process.env.REACT_APP_BACKEND}/weather?city_name=${this.state.city}&lat=${cityInfo.data[0].lat}&lon=${cityInfo.data[0].lon}`
     console.log(cityInfo);
 
     let urlMovie = `${process.env.REACT_APP_BACKEND}/movies?city_name=${this.state.city}`
